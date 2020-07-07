@@ -2,6 +2,9 @@ export default (state = {}, action) => {
   const {username, post, upvotes, downvotes, timestamp, id} = action;
   switch(action.type){
     case "ADD_POST":
+      const currentTime = Date.now();
+      const formattedTime =  new Intl.DateTimeFormat('en-US', {year: 'numeric', month: '2-digit',day: '2-digit', hour: '2-digit', minute: '2-digit'}).format(currentTime);
+      
       return Object.assign({}, state, {
         [id]: {
           id: id,
@@ -9,7 +12,7 @@ export default (state = {}, action) => {
           post: post,
           upvotes: 0,
           downvotes: 0,
-          timestamp: timestamp
+          timestamp: formattedTime
         }
       });
 

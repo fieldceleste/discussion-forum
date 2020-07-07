@@ -85,6 +85,10 @@ function PostControl(props) {
   }
     dispatch(action);
   }
+
+  const handleDetailClick = () => {
+    
+  }
   
  ///render 
   

@@ -28,7 +28,7 @@ function Post(props){
     <p>DownVotes: {props.downvotes}</p>
     <button onClick = {() => props.whenDownvoteClicked(props.id)} type="submit">Downvote</button>
     </div>
-    
+
     </React.Fragment>
   )
 }

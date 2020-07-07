@@ -6,7 +6,7 @@ function PostDetail(props){
 
   return (
     <React.Fragment>
-
+    <h2>Post Details</h2>
     <h2>{props.username}</h2>
     <p>{props.post}</p>
     <h5>{props.timestamp}</h5>
@@ -19,7 +19,7 @@ function PostDetail(props){
   );
 }
 
-PostDetail.PropTypes = {
+PostDetail.propTypes = {
   post: PropTypes.object,
   onClickingDelete: PropTypes.func,
   onClickingEdit: PropTypes.func

@@ -8,6 +8,7 @@ function PostList(props) {
       {Object.values(props.postList).map((post) => {
         return <Post whenUpvoteClicked = {props.onUpvoteClick}
         whenDownvoteClicked = {props.onDownvoteClick}
+        whenPostClicked = {props.onPostClick}
         username={post.username}
         id = {post.id}
         post = {post.post}
@@ -22,7 +23,8 @@ function PostList(props) {
 PostList.propTypes = {
   postList: PropTypes.object,
   onUpvoteClick: PropTypes.func,
-  onDownvoteClick: PropTypes.func
+  onDownvoteClick: PropTypes.func,
+  onPostClick: PropTypes.func
 }
 
 export default PostList;

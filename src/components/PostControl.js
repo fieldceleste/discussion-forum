@@ -86,8 +86,21 @@ function PostControl(props) {
     dispatch(action);
   }
 
-  const handleDetailClick = () => {
-    
+  // details of post
+  const handleDetailClick = (idDetail) => {
+    const {dispatch} = props;
+    const currentlySelectedPost = Object.values(props.masterPostList).filter(post => post.id === idDetail)[0];
+    const {id, post, username, upvotes, downvotes, timestamp} = currentlySelectedPost;
+    const action = {
+      type: "SELECT_POST",
+      id: id,
+      username: username,
+      post: post,
+      upvotes: upvotes,
+      downvotes: downvotes,
+      timestamp: timestamp
+    }
+    dispatch(action);
   }
   
  ///render 
@@ -95,15 +108,24 @@ function PostControl(props) {
     let buttonText = null;
     let buttonPage = null;
     let currentlyVisibleState = null;
-
+    console.log(props.selectedPost);
     if (props.formVisibleOnPage) {
-      currentlyVisibleState = <NewPostForm onNewPostCreation = { handleAddingNewPostToList } />
+      currentlyVisibleState = <NewPostForm 
+      onNewPostCreation = { handleAddingNewPostToList } />
       buttonText = "Return to Post list";
       buttonPage = handleFormClick;
-    }
-    else {
+      
+    } else if (props.selectedPost != null) {
+      currentlyVisibleState = <PostDetail
+      post = {props.selectedPost}
+      onClickingDelete= {handleDeletingPost}/>
+      buttonText= "Return To Posts" 
+      buttonPage = handleFormClick;
+      // SELECTED ITEM NULL FUNCTION
+    } else {
       currentlyVisibleState = <PostList 
       postList={props.masterPostList} 
+      onPostClick = { handleDetailClick }
       onUpvoteClick = { handleWhenUpVoteClicked }
       onDownvoteClick = { handleWhenDownVoteClicked } />
       buttonText= "Add Post";
@@ -116,9 +138,9 @@ function PostControl(props) {
         <br></br>
         <button onClick={buttonPage}>{buttonText}</button>
       </React.Fragment> 
-    )
+    );
+  }
 
-}
 
 PostControl.propTypes = {
   masterPostList: PropTypes.object,

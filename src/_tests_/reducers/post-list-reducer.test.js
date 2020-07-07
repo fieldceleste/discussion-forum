@@ -77,5 +77,29 @@ describe('postListReducer', () => {
       }
     })
   })
+
+  test('increment downvote on post', () => {
+    const {username, post, upvotes, downvotes, timestamp, id} = postData;
+    const newDownvotes = downvotes - 1;
+    action = {
+      type: "DOWNVOTE_POST",
+      id: 1,
+      username: username,
+      post: post,
+      upvotes: upvotes,
+      downvotes: downvotes,
+      timestamp: formattedTime
+    }
+    expect(postListReducer(currentState, action)).toEqual({
+      [id] : {
+        id: id,
+        username: username,
+        post: post,
+        upvotes: upvotes,
+        downvotes: newDownvotes,
+        timestamp: formattedTime
+      }
+    })
+  })
 })
 

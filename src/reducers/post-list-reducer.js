@@ -14,8 +14,8 @@ export default (state = {}, action) => {
       });
 
       case 'UPVOTE_POST':
-        const newState = { ...state };
-        let voteUp = newState[id].upvotes + 1;
+        const newUpvoteState = { ...state };
+        let voteUp = newUpvoteState[id].upvotes + 1;
       
         return Object.assign({} , state, {
           [id]:  {
@@ -27,10 +27,23 @@ export default (state = {}, action) => {
             upvotes: voteUp
           },
         });
-    
+     case 'DOWNVOTE_POST':
+       const newDownvoteState = { ...state };
+       let voteDown = newDownvoteState[id].downvotes -1;
+
+       return Object.assign({} , state, {
+         [id]: {
+           id: id,
+           username: username,
+           post: post,
+           downvotes: voteDown,
+           timestamp: timestamp,
+           upvotes: upvotes
+          },
+        });
+
     default:
       return state;
   }
 }
 
-// Object.assign({}, state[id],

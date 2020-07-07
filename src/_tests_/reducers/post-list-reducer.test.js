@@ -6,6 +6,7 @@ describe('postListReducer', () => {
   
   const timestamp = Date.now();
   const formattedTime =  new Intl.DateTimeFormat('en-US', {year: 'numeric', month: '2-digit',day: '2-digit', hour: '2-digit', minute: '2-digit'}).format(timestamp);
+  
   const postData = {
     id: 1,
     username: "jhvozdovich",
@@ -23,7 +24,15 @@ describe('postListReducer', () => {
     upvotes: 0,
     downvotes: 0,
     timestamp: formattedTime
-  }
+  },
+  2: {
+    id: 2,
+  username: "cfield",
+  post: "Hello World",
+  upvotes: 0,
+  downvotes: 0,
+  timestamp: formattedTime
+}
   }
 
   test('return default empty object if there is no action type passed', () => {
@@ -74,7 +83,15 @@ describe('postListReducer', () => {
         upvotes: newUpvotes,
         downvotes: downvotes,
         timestamp: formattedTime
-      }
+      },
+      2: {
+        id: 2,
+        username: "cfield",
+        post: "Hello World",
+        upvotes: 0,
+        downvotes: 0,
+        timestamp: formattedTime
+    }
     })
   })
 
@@ -98,8 +115,33 @@ describe('postListReducer', () => {
         upvotes: upvotes,
         downvotes: newDownvotes,
         timestamp: formattedTime
-      }
+      },
+      2: {
+        id: 2,
+        username: "cfield",
+        post: "Hello World",
+        upvotes: 0,
+        downvotes: 0,
+        timestamp: formattedTime
+    }
     })
+  })
+
+  test('should delete a post', () => {
+    action = {
+      type: "DELETE_POST",
+      id: 1
+    };
+    expect(postListReducer(currentState, action)).toEqual({
+      2 : {
+        id: 2,
+        username: "cfield",
+        post: "Hello World",
+        upvotes: 0,
+        downvotes: 0,
+        timestamp: formattedTime
+      }
+    });
   })
 })
 

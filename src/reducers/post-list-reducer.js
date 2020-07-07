@@ -41,9 +41,13 @@ export default (state = {}, action) => {
            upvotes: upvotes
           },
         });
+      case 'DELETE_POST':
+        const newState = { ...state };
+        delete newState[id];
+        return newState;
 
     default:
       return state;
   }
-}
+};
 

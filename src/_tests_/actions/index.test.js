@@ -6,7 +6,7 @@ const formattedTime =  new Intl.DateTimeFormat('en-US', {year: 'numeric', month:
 
 describe('discussion forum actions', () => {
   test('addPost should create ADD_POST action', () => {
-    expect(actions.addPost({id: 1, username: "jhvozdovich", post: "I love cats!", upvotes: 0,downvotes: 0,timestamp: formattedTime})).toEqual({
+    expect(actions.addPost({id: 1, username: "jhvozdovich", post: "I love cats!"})).toEqual({
       type: c.ADD_POST,
       id:1,
       username: "jhvozdovich",
@@ -16,5 +16,15 @@ describe('discussion forum actions', () => {
       timestamp: formattedTime
     });
   });
-  // it('voteUp should create UPVOTE_POST action')
+  test('voteUp should create UPVOTE_POST action', () => {
+    expect(actions.voteUp({id: 1, username: "jhvozdovich", post: "I love cats!", upvotes: 7,downvotes: 12,timestamp: formattedTime})).toEqual({
+      type: c.UPVOTE_POST,
+      id:1,
+      username: "jhvozdovich",
+      post: "I love cats!",
+      upvotes: 7,
+      downvotes: 12,
+      timestamp: formattedTime
+    });
+  });
 });

@@ -16,9 +16,28 @@ export const addPost = (mainPost) => {
   }
 }
 
-// export const upvotePost = (mainPost) => {(
-//    type: c.UPVOTE_POST
-// )}
+export const voteUp = (mainPost) => {
+  const {username, post, upvotes, downvotes, timestamp, id} = mainPost;
+  return{
+   type: c.UPVOTE_POST,
+   username: username,
+   post: post,
+   id:id,
+   upvotes: upvotes,
+   downvotes: downvotes,
+   timestamp: formattedTime,
+  }
+}
+
+export const voteDown = (mainPost) => ({
+  type: c.DOWNVOTE_POST
+});
+
+export const deletePost = (id) => ({
+  type: c.DELETE_POST,
+  id
+});
+
 
 
 // export default (state = {}, action) => {

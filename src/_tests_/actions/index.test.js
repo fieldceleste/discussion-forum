@@ -38,4 +38,26 @@ describe('discussion forum actions', () => {
       timestamp: formattedTime
     });
   });
+  test('deletePost should create DELETE_POST action', () => {
+    expect(actions.deletePost(1)).toEqual({
+      type: c.DELETE_POST,
+      id: 1
+    });
+  });
+  test('toggleForm should create TOGGLE_FORM action', () => {
+    expect(actions.toggleForm()).toEqual({
+      type: c.TOGGLE_FORM
+    })
+  })
+  test('selectPost should create SELECT_POST action', () => {
+    expect(actions.selectPost({id: 1, username: "jhvozdovich", post: "I love cats!", upvotes: 7,downvotes: 12,timestamp: formattedTime})).toEqual ({
+      type: c.SELECT_POST,
+      id:1,
+      username: "jhvozdovich",
+      post: "I love cats!",
+      upvotes: 7,
+      downvotes: 12,
+      timestamp: formattedTime
+    });
+  });
 });

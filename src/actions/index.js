@@ -47,47 +47,19 @@ export const deletePost = (id) => ({
   id
 });
 
+export const toggleForm = () => ({
+  type: c.TOGGLE_FORM
+})
 
-
-// export default (state = {}, action) => {
-//   const {username, post, upvotes, downvotes, timestamp, id} = action;
-
-
-//       case 'UPVOTE_POST':
-//         const newUpvoteState = { ...state };
-//         let voteUp = newUpvoteState[id].upvotes + 1;
-      
-//         return Object.assign({} , state, {
-//           [id]:  {
-//             id: id,
-//             username: username,
-//             post: post,
-//             downvotes: downvotes,
-//             timestamp: timestamp,
-//             upvotes: voteUp
-//           },
-//         });
-//      case 'DOWNVOTE_POST':
-//        const newDownvoteState = { ...state };
-//        let voteDown = newDownvoteState[id].downvotes -1;
-
-//        return Object.assign({} , state, {
-//          [id]: {
-//            id: id,
-//            username: username,
-//            post: post,
-//            downvotes: voteDown,
-//            timestamp: timestamp,
-//            upvotes: upvotes
-//           },
-//         });
-//       case 'DELETE_POST':
-//         const newState = { ...state };
-//         delete newState[id];
-//         return newState;
-
-//     default:
-//       return state;
-//   }
-// };
-
+export const selectPost =(mainPost) => {
+  const {username, post, upvotes, downvotes, timestamp, id} = mainPost;
+  return{
+   type: c.SELECT_POST,
+   username: username,
+   post: post,
+   id:id,
+   upvotes: upvotes,
+   downvotes: downvotes,
+   timestamp: timestamp
+  }
+}

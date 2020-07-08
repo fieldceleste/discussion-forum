@@ -7,23 +7,13 @@ describe("selectedPostReducer", () => {
   const formattedTime =  new Intl.DateTimeFormat('en-US', {year: 'numeric', month: '2-digit',day: '2-digit', hour: '2-digit', minute: '2-digit'}).format(timestamp);
 
   const currentState = {
-    1: {
       id: 1,
     username: "jhvozdovich",
     post: "I love cats!",
     upvotes: 0,
     downvotes: 0,
     timestamp: formattedTime
-    },
-    2: {
-      id: 2,
-      username: "cfield",
-      post: "Hello World",
-      upvotes: 0,
-      downvotes: 0,
-      timestamp: formattedTime
     }
-  }
 
   test("should return default without recognized action type", () => {
     expect(selectedPostReducer(null, {type:null})).toEqual(null)
@@ -49,5 +39,10 @@ describe("selectedPostReducer", () => {
     })
   })
 
-  
+  test("should toggle off of selected post", () => {
+    action = {
+      type: "SELECT_POST"
+    }
+    expect(selectedPostReducer(currentState, action)).toEqual(null);
+  })
 })

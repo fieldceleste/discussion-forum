@@ -5,8 +5,10 @@ import PropTypes from 'prop-types';
 function PostList(props) {
   return(
     <React.Fragment>
+    <hr />
       {Object.values(props.postList).map((post) => {
-        return <Post whenUpvoteClicked = {props.onUpvoteClick}
+        return <Post 
+        whenUpvoteClicked = {props.onUpvoteClick}
         whenDownvoteClicked = {props.onDownvoteClick}
         whenPostClicked = {props.onPostClick}
         username={post.username}

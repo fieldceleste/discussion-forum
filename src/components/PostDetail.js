@@ -2,17 +2,17 @@ import React from "react";
 import PropTypes from "prop-types";
 
 function PostDetail(props){
-  const { post, onClickingDelete } = props;
-
+  const { mainPost, onClickingDelete } = props;
   return (
+   
     <React.Fragment>
     <h2>Post Details</h2>
-    <h2>{props.username}</h2>
-    <p>{props.post}</p>
-    <h5>{props.timestamp}</h5>
-    <p>UpVotes: {props.upvotes}</p>
-    <p>DownVotes: {props.downvotes}</p>
-    <button onClick={() => onClickingDelete(post.id)}>Remove Post</button>
+    <h2>{mainPost.username}</h2>
+    <p>{mainPost.post}</p>
+    <h5>{mainPost.timestamp}</h5>
+    <p>UpVotes: {mainPost.upvotes}</p>
+    <p>DownVotes: {mainPost.downvotes}</p>
+    <button onClick={() => onClickingDelete(mainPost.id)}>Remove Post</button>
     <button onClick={ props.onClickingEdit }>Update Post</button>
 
     </React.Fragment>
@@ -20,7 +20,7 @@ function PostDetail(props){
 }
 
 PostDetail.propTypes = {
-  post: PropTypes.object,
+  mainPost: PropTypes.object,
   onClickingDelete: PropTypes.func,
   onClickingEdit: PropTypes.func
 };

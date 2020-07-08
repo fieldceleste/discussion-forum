@@ -26,7 +26,7 @@ describe("selectedPostReducer", () => {
   }
 
   test("should return default without recognized action type", () => {
-    expect(selectedPostReducer({}, {type:null})).toEqual({})
+    expect(selectedPostReducer(null, {type:null})).toEqual(null)
   })
 
   test("should select post based on input", () => {
@@ -39,15 +39,15 @@ describe("selectedPostReducer", () => {
       downvotes: 0,
       timestamp: formattedTime
     }
-    expect(selectedPostReducer(currentState, action)).toEqual( {
-      1: {
+    expect(selectedPostReducer(null, action)).toEqual( {
        id: 1,
        username: "jhvozdovich",
        post: "I love cats!",
        upvotes: 0,
        downvotes: 0,
        timestamp: formattedTime
-      }
     })
   })
+
+  
 })

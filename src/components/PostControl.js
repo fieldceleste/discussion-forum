@@ -6,11 +6,10 @@ import  { connect } from 'react-redux';
 import PropTypes from "prop-types";
 
 const timestamp = Date.now();
-  const formattedTime =  new Intl.DateTimeFormat('en-US', {year: 'numeric', month: '2-digit',day: '2-digit', hour: '2-digit', minute: '2-digit'}).format(timestamp);
-
+const formattedTime =  new Intl.DateTimeFormat('en-US', {year: 'numeric', month: '2-digit',day: '2-digit', hour: '2-digit', minute: '2-digit'}).format(timestamp);
 
 function PostControl(props) {
-  const { masterPostList, formVisibleOnPage } = props;
+  const { masterPostList, formVisibleOnPage, selectedPost } = props;
 
   function handleFormClick() {
     const {dispatch} = props;
@@ -48,7 +47,8 @@ function PostControl(props) {
       id:id
     }
     dispatch(action);
-    this.setState({selectedItem:null});
+    //  refactor no setState
+    // this.setState({selectedItem:null});
   }
 
 
@@ -89,8 +89,8 @@ function PostControl(props) {
   // details of post
   const handleDetailClick = (idDetail) => {
     const {dispatch} = props;
-    const currentlySelectedPost = Object.values(props.masterPostList).filter(post => post.id === idDetail)[0];
-    const {id, post, username, upvotes, downvotes, timestamp} = currentlySelectedPost;
+    const selectedPost = Object.values(props.masterPostList).filter(post => post.id === idDetail)[0];
+    const {id, post, username, upvotes, downvotes, timestamp} = selectedPost;
     const action = {
       type: "SELECT_POST",
       id: id,
@@ -102,26 +102,35 @@ function PostControl(props) {
     }
     dispatch(action);
   }
+
+  const handleDetailNull = () => {
+    const {dispatch} = props;
+    const action = {
+      type: "SELECT_POST"
+    }
+    dispatch(action);
+  }
+  
   
  ///render 
   
     let buttonText = null;
     let buttonPage = null;
     let currentlyVisibleState = null;
-    console.log(props.selectedPost);
+
     if (props.formVisibleOnPage) {
       currentlyVisibleState = <NewPostForm 
       onNewPostCreation = { handleAddingNewPostToList } />
       buttonText = "Return to Post list";
       buttonPage = handleFormClick;
       
-    } else if (props.selectedPost != null) {
+    } else if (props.selectedPost !== null) {
+      console.log(props.selectedPost);
       currentlyVisibleState = <PostDetail
-      post = {props.selectedPost}
+      mainPost = {props.selectedPost}
       onClickingDelete= {handleDeletingPost}/>
       buttonText= "Return To Posts" 
-      buttonPage = handleFormClick;
-      // SELECTED ITEM NULL FUNCTION
+      buttonPage = handleDetailNull;
     } else {
       currentlyVisibleState = <PostList 
       postList={props.masterPostList} 
@@ -142,15 +151,18 @@ function PostControl(props) {
   }
 
 
+
 PostControl.propTypes = {
   masterPostList: PropTypes.object,
+  selectedPost: PropTypes.object,
   formVisibleOnPage: PropTypes.bool
 };
 
 const mapStateToProps = state => {
   return {
     masterPostList: state.masterPostList,
-    formVisibleOnPage: state.formVisibleOnPage
+    formVisibleOnPage: state.formVisibleOnPage,
+    selectedPost: state.selectedPost
   }
 }
 

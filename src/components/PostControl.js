@@ -41,14 +41,13 @@ function PostControl(props) {
 
   // for deleting post
   function handleDeletingPost(id){
+    handleDetailNull();
     const {dispatch} = props;
     const action = {
       type: 'DELETE_POST',
       id:id
     }
     dispatch(action);
-    //  refactor no setState
-    // this.setState({selectedItem:null});
   }
 
 
@@ -131,6 +130,7 @@ function PostControl(props) {
       onClickingDelete= {handleDeletingPost}/>
       buttonText= "Return To Posts" 
       buttonPage = handleDetailNull;
+      
     } else {
       currentlyVisibleState = <PostList 
       postList={props.masterPostList} 

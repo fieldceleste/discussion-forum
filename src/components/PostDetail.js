@@ -13,7 +13,7 @@ function PostDetail(props){
     <p>UpVotes: {mainPost.upvotes}</p>
     <p>DownVotes: {mainPost.downvotes}</p>
     <button onClick={() => onClickingDelete(mainPost.id)}>Remove Post</button>
-    <button onClick={ props.onClickingEdit }>Update Post</button>
+    
 
     </React.Fragment>
   );
@@ -21,8 +21,7 @@ function PostDetail(props){
 
 PostDetail.propTypes = {
   mainPost: PropTypes.object,
-  onClickingDelete: PropTypes.func,
-  onClickingEdit: PropTypes.func
+  onClickingDelete: PropTypes.func
 };
 
 export default PostDetail;

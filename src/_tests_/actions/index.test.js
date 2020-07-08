@@ -27,4 +27,15 @@ describe('discussion forum actions', () => {
       timestamp: formattedTime
     });
   });
+  test('voteDown should create DOWNVOTE_POST action', () => {
+    expect(actions.voteDown({id: 1, username: "jhvozdovich", post: "I love cats!", upvotes: 7,downvotes: 12,timestamp: formattedTime})).toEqual({
+      type: c.DOWNVOTE_POST,
+      id:1,
+      username: "jhvozdovich",
+      post: "I love cats!",
+      upvotes: 7,
+      downvotes: 12,
+      timestamp: formattedTime
+    });
+  });
 });

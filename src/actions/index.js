@@ -25,13 +25,22 @@ export const voteUp = (mainPost) => {
    id:id,
    upvotes: upvotes,
    downvotes: downvotes,
-   timestamp: formattedTime,
+   timestamp: timestamp
   }
 }
 
-export const voteDown = (mainPost) => ({
-  type: c.DOWNVOTE_POST
-});
+export const voteDown = (mainPost) => {
+  const {username, post, upvotes, downvotes, timestamp, id} = mainPost;
+  return{
+   type: c.DOWNVOTE_POST,
+   username: username,
+   post: post,
+   id:id,
+   upvotes: upvotes,
+   downvotes: downvotes,
+   timestamp: timestamp
+  }
+}
 
 export const deletePost = (id) => ({
   type: c.DELETE_POST,

@@ -25,7 +25,7 @@ function NewPostForm(props) {
           name='post'
           placeholder='Write your post here' />
         <br/>
-        <button type='submit'>Submit</button>
+        <button className="button btnsubmit" type='submit'>Submit</button>
       </form>
     </React.Fragment>
   )

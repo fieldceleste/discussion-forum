@@ -6,7 +6,11 @@ function PostList(props) {
   return(
     <React.Fragment>
     <hr />
-      {Object.values(props.postList).map((post) => {
+      {Object.values(props.postList)
+      .sort(function(a, b) {
+        return b.upvotes - a.upvotes;
+      })
+      .map((post) => {
         return <Post 
         whenUpvoteClicked = {props.onUpvoteClick}
         whenDownvoteClicked = {props.onDownvoteClick}
@@ -30,3 +34,4 @@ PostList.propTypes = {
 }
 
 export default PostList;
+

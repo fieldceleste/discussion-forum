@@ -1,4 +1,6 @@
 import selectedPostReducer from '../../reducers/selected-post-reducer';
+import * as c from './../../actions/ActionTypes';
+import * as a from './../../actions/index';
 
 describe("selectedPostReducer", () => {
   let action;
@@ -20,15 +22,14 @@ describe("selectedPostReducer", () => {
   })
 
   test("should select post based on input", () => {
-    action = {
-      type: "SELECT_POST",
+    action = a.selectPost({
       id: 1,
       username: "jhvozdovich",
       post: "I love cats!",
       upvotes: 0,
       downvotes: 0,
       timestamp: formattedTime
-    }
+    })
     expect(selectedPostReducer(null, action)).toEqual( {
        id: 1,
        username: "jhvozdovich",
@@ -40,9 +41,7 @@ describe("selectedPostReducer", () => {
   })
 
   test("should toggle off of selected post", () => {
-    action = {
-      type: "SELECT_POST"
-    }
+    action = a.selectPost();
     expect(selectedPostReducer(currentState, action)).toEqual(null);
   })
 })

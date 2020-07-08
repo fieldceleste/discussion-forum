@@ -1,7 +1,9 @@
+import * as c from './../actions/ActionTypes';
+
 export default (state = null, action) => {
   const {username, post, upvotes, downvotes, timestamp, id} = action;
   switch (action.type){
-    case 'SELECT_POST':
+    case c.SELECT_POST:
       if(state === null) {
         return {
             id: id,

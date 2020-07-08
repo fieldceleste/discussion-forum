@@ -4,6 +4,7 @@ import PostList from './PostList';
 import PostDetail from './PostDetail';
 import  { connect } from 'react-redux';
 import PropTypes from "prop-types";
+import * as a from './../actions';
 
 const timestamp = Date.now();
 const formattedTime =  new Intl.DateTimeFormat('en-US', {year: 'numeric', month: '2-digit',day: '2-digit', hour: '2-digit', minute: '2-digit'}).format(timestamp);
@@ -13,9 +14,7 @@ function PostControl(props) {
 
   function handleFormClick() {
     const {dispatch} = props;
-    const action = {
-      type: 'TOGGLE_FORM'
-    }
+    const action = a.toggleForm();
     dispatch(action);
   }
   
@@ -23,19 +22,9 @@ function PostControl(props) {
   const handleAddingNewPostToList = (newPost) =>{
     const {dispatch} = props;
     const {id, post, username, upvotes, downvotes} = newPost;
-    const action = {
-      type: 'ADD_POST',
-      id:id,
-      username: username,
-      post:post,
-      upvotes:upvotes,
-      downvotes:downvotes,
-      timestamp:timestamp
-    }
+    const action = a.addPost(newPost);
     dispatch(action);
-    const action2 ={
-      type: 'TOGGLE_FORM'
-    }
+    const action2 = a.toggleForm();
     dispatch(action2)
   }
 
@@ -43,45 +32,22 @@ function PostControl(props) {
   function handleDeletingPost(id){
     handleDetailNull();
     const {dispatch} = props;
-    const action = {
-      type: 'DELETE_POST',
-      id:id
-    }
+    const action = a.deletePost(id);
     dispatch(action);
   }
 
 
 // up vote button 
- const handleWhenUpVoteClicked =(idUpvote) =>{
+ const handleWhenUpVoteClicked =(upvoteObject) =>{
     const {dispatch} = props;
-    const currentlySelectedPost = Object.values(props.masterPostList).filter(post => post.id === idUpvote)[0];
-    const {id, post, username, upvotes, downvotes, timestamp} = currentlySelectedPost;
-    const action = {
-    type: "UPVOTE_POST",
-    id: id,
-    username: username,
-    post: post,
-    upvotes: upvotes,
-    downvotes: downvotes,
-    timestamp: timestamp
-  }
+    const action = a.voteUp(upvoteObject)
     dispatch(action);
   }
 
   // down vote button
-  const handleWhenDownVoteClicked =(idDownvote) =>{
+  const handleWhenDownVoteClicked =(downvoteObject) =>{
     const {dispatch} = props;
-    const currentlySelectedPost = Object.values(props.masterPostList).filter(post => post.id === idDownvote)[0];
-    const {id, post, username, upvotes, downvotes, timestamp} = currentlySelectedPost;
-    const action = {
-    type: "DOWNVOTE_POST",
-    id: id,
-    username: username,
-    post: post,
-    upvotes: upvotes,
-    downvotes: downvotes,
-    timestamp: timestamp
-  }
+    const action = a.voteDown(downvoteObject)
     dispatch(action);
   }
 
@@ -145,7 +111,7 @@ function PostControl(props) {
       <React.Fragment> 
         {currentlyVisibleState}
         <br></br>
-        <button onClick={buttonPage}>{buttonText}</button>
+        <button className="button" onClick={buttonPage}>{buttonText}</button>
       </React.Fragment> 
     );
   }

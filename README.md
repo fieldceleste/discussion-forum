@@ -3,6 +3,12 @@
 #### Author: **Jessica Hvozdovich and Celeste Field**
 #### July 7, 2020
 
+![Add post gif](./public/giphy1.gif)
+
+![Add post gif](./public/giphy2.gif)
+
+![Add post gif](./public/giphy3.gif)
+
 ### Description
 
 _This application uses React with create-react-app, components, JSX, and props while building a dynamic site with Redux. Users can submit posts via a form, they are posted with a timestamp, and users can upvote or downvote posts and change their ranking in the display._

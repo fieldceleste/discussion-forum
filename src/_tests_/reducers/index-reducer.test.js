@@ -3,6 +3,7 @@ import { createStore } from 'redux';
 import formVisibleReducer from '../../reducers/form-visible-reducer';
 import postListReducer from '../../reducers/post-list-reducer';
 import selectedPostReducer from '../../reducers/selected-post-reducer';
+import * as a from './../../actions/index';
 
 let store = createStore(rootReducer);
 
@@ -31,37 +32,33 @@ describe('indexReducer', () => {
   test("Check that initial state of postListReducer matches root reducer", () => {
     const timestamp = Date.now();
     const formattedTime =  new Intl.DateTimeFormat('en-US', {year: 'numeric', month: '2-digit',day: '2-digit', hour: '2-digit', minute: '2-digit'}).format(timestamp);
-     const action = {
-       type: 'ADD_POST',
+     const action = a.addPost({
        username:'jhvozdovich',
        post: 'I love cats',
        upvotes: 0, 
        downvotes: 0,
        timestamp: formattedTime,
        id:1
-     }
+     })
      store.dispatch(action);
      expect(store.getState().masterPostList).toEqual(postListReducer(undefined,action));
   });
   
   test('check that TOGGLE_FORM changes occur in formVisibleReducer and root reducer', () => {
-    const action = {
-      type: 'TOGGLE_FORM'
-    }
+    const action = a.toggleForm();
     store.dispatch(action);
     expect(store.getState().formVisibleOnPage).toEqual(formVisibleReducer(undefined, action));
   });
 
   test('check that SELECT_POST changes occur in selectedPostReducer and root reducer', () => {
-    const action = {
-      type: 'SELECT_POST',
+    const action = a.selectPost({
        username:'jhvozdovich',
        post: 'I love cats',
        upvotes: 0, 
        downvotes: 0,
        timestamp: "11:02",
        id:1
-      }
+      })
     store.dispatch(action);
     expect(store.getState().selectedPost).toEqual(selectedPostReducer(undefined, action));
   });

@@ -1,4 +1,5 @@
 import postListReducer from "../../reducers/post-list-reducer";
+import * as a from './../../actions/index';
 
 
 describe('postListReducer', () => {
@@ -42,15 +43,14 @@ describe('postListReducer', () => {
   test('add new post to masterPostList', () => {
     const {username, post, id} = postData;
     
-    action = {
+    action = a.addPost({
       id: id,
-      type: "ADD_POST",
       username: username,
       post: post,
       upvotes: 0,
       downvotes: 0,
       timestamp: formattedTime
-    }
+    })
     expect(postListReducer({}, action)).toEqual({
       [id] : {
         id: id,
@@ -66,15 +66,14 @@ describe('postListReducer', () => {
   test('increment upvote on post', () => {
     const {username, post, upvotes, downvotes, timestamp, id} = postData;
     const newUpvotes = upvotes + 1;
-    action = {
-      type: "UPVOTE_POST",
+    action = a.voteUp({
       id: 1,
       username: username,
       post: post,
       upvotes: upvotes,
       downvotes: downvotes,
-      timestamp: formattedTime
-    }
+      timestamp: timestamp
+    })
     expect(postListReducer(currentState, action)).toEqual({
       [id] : {
         id: id,
@@ -82,7 +81,7 @@ describe('postListReducer', () => {
         post: post,
         upvotes: newUpvotes,
         downvotes: downvotes,
-        timestamp: formattedTime
+        timestamp: timestamp
       },
       2: {
         id: 2,
@@ -90,7 +89,7 @@ describe('postListReducer', () => {
         post: "Hello World",
         upvotes: 0,
         downvotes: 0,
-        timestamp: formattedTime
+        timestamp: timestamp
     }
     })
   })
@@ -98,15 +97,14 @@ describe('postListReducer', () => {
   test('increment downvote on post', () => {
     const {username, post, upvotes, downvotes, timestamp, id} = postData;
     const newDownvotes = downvotes - 1;
-    action = {
-      type: "DOWNVOTE_POST",
+    action = a.voteDown({
       id: 1,
       username: username,
       post: post,
       upvotes: upvotes,
       downvotes: downvotes,
-      timestamp: formattedTime
-    }
+      timestamp: timestamp
+    })
     expect(postListReducer(currentState, action)).toEqual({
       [id] : {
         id: id,
@@ -114,7 +112,7 @@ describe('postListReducer', () => {
         post: post,
         upvotes: upvotes,
         downvotes: newDownvotes,
-        timestamp: formattedTime
+        timestamp: timestamp
       },
       2: {
         id: 2,
@@ -122,16 +120,13 @@ describe('postListReducer', () => {
         post: "Hello World",
         upvotes: 0,
         downvotes: 0,
-        timestamp: formattedTime
+        timestamp: timestamp
     }
     })
   })
 
   test('should delete a post', () => {
-    action = {
-      type: "DELETE_POST",
-      id: 1
-    };
+    action = a.deletePost(1);
     expect(postListReducer(currentState, action)).toEqual({
       2 : {
         id: 2,

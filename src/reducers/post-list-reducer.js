@@ -1,7 +1,9 @@
+import * as c from './../actions/ActionTypes';
+
 export default (state = {}, action) => {
   const {username, post, upvotes, downvotes, timestamp, id} = action;
   switch(action.type){
-    case "ADD_POST":
+    case c.ADD_POST:
       const currentTime = Date.now();
       const formattedTime =  new Intl.DateTimeFormat('en-US', {year: 'numeric', month: '2-digit',day: '2-digit', hour: '2-digit', minute: '2-digit'}).format(currentTime);
       
@@ -16,7 +18,7 @@ export default (state = {}, action) => {
         }
       });
 
-      case 'UPVOTE_POST':
+      case c.UPVOTE_POST:
         const newUpvoteState = { ...state };
         let voteUp = newUpvoteState[id].upvotes + 1;
       
@@ -30,7 +32,7 @@ export default (state = {}, action) => {
             upvotes: voteUp
           },
         });
-     case 'DOWNVOTE_POST':
+     case c.DOWNVOTE_POST:
        const newDownvoteState = { ...state };
        let voteDown = newDownvoteState[id].downvotes -1;
 
@@ -44,7 +46,7 @@ export default (state = {}, action) => {
            upvotes: upvotes
           },
         });
-      case 'DELETE_POST':
+      case c.DELETE_POST:
         const newState = { ...state };
         delete newState[id];
         return newState;

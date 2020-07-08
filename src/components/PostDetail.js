@@ -4,19 +4,23 @@ import PropTypes from "prop-types";
 function PostDetail(props){
   const { mainPost, onClickingDelete } = props;
   return (
-   
+ 
     <React.Fragment>
-    <h2>Post Details</h2>
-    <h2>{mainPost.username}</h2>
-    <p>{mainPost.post}</p>
-    <h5>{mainPost.timestamp}</h5>
+    <hr /> 
+    <h2><u>Post Details:</u></h2>
+    <h2>User-{mainPost.username}</h2>
+    <p className="time-stamp">{mainPost.timestamp}</p>
+    <br />
+    <div className= "borderBox">
+    <li className="paragraph">{mainPost.post}</li>
+    </div>
     <p>UpVotes: {mainPost.upvotes}</p>
     <p>DownVotes: {mainPost.downvotes}</p>
-    <button onClick={() => onClickingDelete(mainPost.id)}>Remove Post</button>
-    
-
+    <button className="button btnsubmit" onClick={() => onClickingDelete(mainPost.id)}>Remove Post</button>
+    <br />
     </React.Fragment>
-  );
+   
+  );;
 }
 
 PostDetail.propTypes = {

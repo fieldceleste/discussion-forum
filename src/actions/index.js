@@ -52,6 +52,7 @@ export const toggleForm = () => ({
 })
 
 export const selectPost =(mainPost) => {
+  if (mainPost!= null) {
   const {username, post, upvotes, downvotes, timestamp, id} = mainPost;
   return{
    type: c.SELECT_POST,
@@ -62,4 +63,9 @@ export const selectPost =(mainPost) => {
    downvotes: downvotes,
    timestamp: timestamp
   }
+} else {
+  return {
+    type: c.SELECT_POST
+  }
+}
 }
